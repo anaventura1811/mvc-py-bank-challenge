@@ -1,5 +1,5 @@
 from sqlalchemy import Column, BIGINT, TEXT, DATE, String
-from sqlalchemy.orm import relationship
+# from sqlalchemy.orm import relationship
 from src.models.sqlite.settings.base import Base
 
 
@@ -12,8 +12,8 @@ class CustomerTable(Base):
     birth_date = Column(DATE, nullable=False)
     customer_type = Column(String, nullable=False)
     phone = Column(TEXT, nullable=False)
-    addresses = relationship("Address", back_populates="customer")
-    profiles = relationship("CustomerProfile", back_populates="customer")
+    # addresses = relationship("Address", back_populates="customer")
+    # profiles = relationship("CustomerProfile", back_populates="customer")
 
     def __repr__(self):
         personal_data = f"full_name={self.full_name}, birth_date={self.birth_date}"
