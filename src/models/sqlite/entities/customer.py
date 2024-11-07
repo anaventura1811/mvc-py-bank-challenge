@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from src.models.sqlite.settings.base import Base
 
 
-class Customer(Base):
+class CustomerTable(Base):
     __tablename__ = "customer"
 
     id = Column(BIGINT, primary_key=True)

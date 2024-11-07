@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from src.models.sqlite.settings.base import Base
 
 
-class Transaction(Base):
+class TransactionTable(Base):
     __tablename__ = 'transaction'
 
     id = Column(BIGINT, primary_key=True)

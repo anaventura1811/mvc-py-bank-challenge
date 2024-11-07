@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from src.models.sqlite.settings.base import Base
 
 
-class Address(Base):
+class AddressTable(Base):
     __tablename__ = "address"
 
     id = Column(BIGINT, primary_key=True)
@@ -11,7 +11,7 @@ class Address(Base):
     street = Column(TEXT, nullable=False)
     city = Column(TEXT, nullable=False)
     state = Column(TEXT, nullable=False)
-    postal_code = Column(TEXT, nullable=False)
+    zip_code = Column(TEXT, nullable=False)
     customer = relationship("Customer", back_populates="address")
 
     def __repr__(self):
