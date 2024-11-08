@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import datetime
 from unittest import mock
 from mock_alchemy.mocking import UnifiedAlchemyMagicMock
 from src.models.sqlite.entities.customer import CustomerTable
@@ -13,8 +13,10 @@ class MockConnection:
                  .filter(CustomerTable.email == "ana@teste.com")
                  .first()],
                 [CustomerTable(full_name="Ana Ventura",
-                               email="ana@teste.com", phone="30 99999-9999",
-                               customer_type="PF", birth_date=date(1990, 11, 18).isoformat())]
+                               created_at=datetime.now(),
+                               email="ana@teste.com",
+                               phone="83 99999-9999",
+                               cpf="000.000.000-00")]
             )]
         )
 
