@@ -1,4 +1,3 @@
-from typing import Dict
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.customer import CustomerTable
 from src.models.sqlite.interfaces.customer_interface import CustomerInterface
@@ -9,16 +8,15 @@ class CustomerRepository(CustomerInterface):
     def __init__(self, db_connection) -> None:
         self.__db_connection = db_connection
 
-    def insert_customer(self, customer_data: Dict) -> None:
+    def insert_customer(self, full_name: str, email: str, phone: str, cpf: str) -> None:
         with self.__db_connection as database:
             try:
                 customer = (
                     CustomerTable(
-                        full_name=customer_data["full_name"],
-                        email=customer_data["email"],
-                        birth_date=customer_data["birth_date"],
-                        customer_type=customer_data["customer_type"],
-                        phone=customer_data["phone"]
+                        full_name=full_name,
+                        email=email,
+                        phone=phone,
+                        cpf=cpf,
                     )
                 )
                 database.session.add(customer)
@@ -38,4 +36,20 @@ class CustomerRepository(CustomerInterface):
                 )
                 return customer
             except NoResultFound:
+                return None
+
+    def update_customer(self, email: str, phone: str) -> CustomerTable:
+        with self.__db_connection as database:
+            try:
+                updated_customer = (
+                    database.session
+                    .query(CustomerTable)
+                    .filter(CustomerTable.email == email)
+                    .update({CustomerTable.phone: phone}, sincronyze_session=True)
+                    .one()
+                )
+                database.session.commit()
+                return updated_customer
+            except NoResultFound:
+                database.session.rollback()
                 return None

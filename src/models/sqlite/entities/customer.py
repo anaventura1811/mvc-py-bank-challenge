@@ -1,3 +1,4 @@
+from datetime import datetime
 from sqlalchemy import Column, BIGINT, TEXT, DATETIME
 from src.models.sqlite.settings.base import Base
 
@@ -7,7 +8,7 @@ class CustomerTable(Base):
 
     id = Column(BIGINT, primary_key=True)
     full_name = Column(TEXT, nullable=False)
-    created_at = Column(DATETIME, nullable=False)
+    created_at = Column(DATETIME, default=datetime.now())
     email = Column(TEXT, nullable=False, unique=True)
     phone = Column(TEXT, nullable=False)
     cpf = Column(TEXT, nullable=False, unique=True)
