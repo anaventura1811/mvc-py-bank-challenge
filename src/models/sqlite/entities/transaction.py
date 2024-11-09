@@ -1,5 +1,5 @@
 from datetime import datetime
-from sqlalchemy import Column, BIGINT, REAL, String, ForeignKey, DATETIME
+from sqlalchemy import Column, TEXT, BIGINT, REAL, String, ForeignKey, DATETIME
 from src.models.sqlite.settings.base import Base
 
 
@@ -13,6 +13,7 @@ class TransactionTable(Base):
     date = Column(DATETIME, default=datetime.now())
     balance_after_transaction = Column(REAL, nullable=False, default=0.0)
     transaction_limit = Column(REAL, nullable=False, default=0.0)
+    description = Column(TEXT, nullable=True)
 
     __mapper_args__ = {
         'polymorphic_on': type,

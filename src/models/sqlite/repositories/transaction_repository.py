@@ -23,7 +23,8 @@ class TransactionRepository(TransactionInterface):
             value=payload["value"],
             date=payload["date"],
             balance_after_transaction=payload["balance_after_transaction"],
-            transaction_limit=payload["transaction_limit"]
+            transaction_limit=payload["transaction_limit"],
+            description=payload["description"]
         )
         return transaction
 

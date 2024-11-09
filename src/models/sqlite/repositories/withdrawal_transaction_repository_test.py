@@ -18,6 +18,7 @@ class MockConnection:
                     date=date(2024, 10, 1).isoformat(),
                     transaction_limit=3000.00,
                     balance_after_transaction=1000.00,
+                    description="Saque"
                 )]
             ), (
                 [mock.call.query(Withdrawal)
