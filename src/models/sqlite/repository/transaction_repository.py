@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Dict
 from sqlalchemy.orm.exc import NoResultFound
 from src.models.sqlite.entities.transaction import TransactionTable
 from src.models.sqlite.interfaces.transaction_interface import TransactionInterface
@@ -16,6 +16,16 @@ class TransactionRepository(TransactionInterface):
             except Exception as exc:
                 database.session.rollback()
                 raise exc
+
+    def generate_transaction_from_dict(self, payload: Dict) -> TransactionTable:
+        transaction = TransactionTable(
+            account_id=payload["account_id"],
+            value=payload["value"],
+            date=payload["date"],
+            balance_after_transaction=payload["balance_after_transaction"],
+            transaction_limit=payload["transaction_limit"]
+        )
+        return transaction
 
     def get_transaction_by_id(self, transaction_id: int) -> TransactionTable:
         with self.__db_connection as database:
