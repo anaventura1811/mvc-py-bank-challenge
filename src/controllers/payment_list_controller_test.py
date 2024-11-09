@@ -1,4 +1,5 @@
 from datetime import date
+import pytest
 from src.models.sqlite.entities.transaction import Payment
 from .payment_list_controller import PaymentListController
 
@@ -44,3 +45,11 @@ def test_list_transactions():
 
     assert "data" in response
     assert response == expected_response
+
+
+def test_list_transaction_error():
+    controller = PaymentListController(MockPaymentRepository())
+    account_id = "456"
+    with pytest.raises(Exception) as exc:
+        controller.list(account_id)
+        assert str(exc) == 'Payload inválido!'
