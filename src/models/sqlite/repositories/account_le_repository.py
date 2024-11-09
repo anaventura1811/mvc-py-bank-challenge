@@ -51,6 +51,19 @@ class AccountLegalEntityRepository(AccountInterface):
             except NoResultFound:
                 return None
 
+    def get_account_by_id(self, account_id: int) -> AccountTable:
+        with self.__db_connection as database:
+            try:
+                account = (
+                    database.session
+                    .query(AccountTable)
+                    .filter(AccountTable.id == account_id)
+                    .one()
+                )
+                return account
+            except NoResultFound:
+                return None
+
     def get_current_balance(self, account_id: int) -> float:
         with self.__db_connection as database:
             try:

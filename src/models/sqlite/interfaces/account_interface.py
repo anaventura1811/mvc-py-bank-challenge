@@ -18,5 +18,9 @@ class AccountInterface(ABC):
         pass
 
     @abstractmethod
+    def get_account_by_id(self, account_id: int) -> AccountTable:
+        pass
+
+    @abstractmethod
     def update_account_balance(self, account_id: int, new_balance: float) -> None:
         pass
