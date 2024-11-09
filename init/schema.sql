@@ -1,12 +1,19 @@
-CREATE TABLE IF NOT EXISTS pessoa_fisica (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    renda_mensal REAL,
-    idade INTEGER,
-    nome_completo TEXT,
-    celular TEXT,
-    email TEXT,
-    categoria TEXT,
-    saldo REAL
+CREATE TABLE IF NOT EXISTS customer (
+    id BIGINT PRIMARY KEY,
+    email TEXT NOT NULL,
+    full_name TEXT NOT NULL,
+    birth_date DATE NOT NULL,
+    customer_type VARCHAR(20) NOT NULL,
+    phone TEXT NOT NULL
+);
+
+CREATE TABLE Customer (
+    id BIGINT PRIMARY KEY,
+    email TEXT NOT NULL UNIQUE,
+    full_name TEXT NOT NULL,
+    birth_date DATE NOT NULL,
+    customer_type VARCHAR(255) NOT NULL,
+    phone TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS pessoa_juridica (
