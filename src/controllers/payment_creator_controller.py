@@ -41,7 +41,7 @@ class PaymentCreatorController(TransactionCreatorControllerInterface):
         raise Exception('Conta não encontrada')
 
     def __generate_transaction_limit(self, balance: float) -> float:
-        now = datetime.now().hour()
+        now = datetime.now().hour
         if now > 20 or now <= 6:
             return 1000.00
         return balance
